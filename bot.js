@@ -1,5 +1,8 @@
-const { Client, MessageAttachment } = require('discord.js');
+const { Client } = require('discord.js');
+const { Pool, Client: DbClient } = require('pg');
+
 const client = new Client();
+const dbClient = new DbClient();
 
 const prefix = '!sb';
 
