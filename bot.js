@@ -14,11 +14,11 @@ client.on('message', message => {
         return;
     const regEx = new RegExp(`^${prefix}(?:set|s)`);
     if (regEx.exec(message.content)) {
-        const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
+        const attachment = 'https://i.imgur.com/w3duR07.png';
         // Send the attachment in the message channel
-        message.channel.send(attachment);
+        message.channel.send("Here!", {
+            file: attachment });
     }
 });
 
 client.login(process.env.BOT_TOKEN);
-
