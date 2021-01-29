@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, MessageAttachment } = require('discord.js');
+const client = new Client();
 
 const prefix = '!sb';
 
@@ -9,11 +9,14 @@ client.on('ready', () => {
 
 client.on('message', message => {
     console.log(message.author.id);
-    if (!message.author || message.author.bot)
+    console.log(message.author.id === process.env.BOT_ID);
+    if (!message.author || message.author.id === process.env.BOT_ID  || message.author.bot)
         return;
     const regEx = new RegExp(`^${prefix}(?:set|s)`);
     if (regEx.exec(message.content)) {
-       message.reply("It's a match!");
+        const attachment = new MessageAttachment('https://i.imgur.com/w3duR07.png');
+        // Send the attachment in the message channel
+        message.channel.send(attachment);
     }
 });
 
