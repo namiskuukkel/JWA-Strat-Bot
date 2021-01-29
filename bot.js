@@ -8,8 +8,8 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    console.log(msg.author.id);
-    if (!msg.author || msg.author.bot)
+    console.log(message.author.id);
+    if (!message.author || message.author.bot)
         return;
     const regEx = new RegExp(`^${prefix}(?:set|s)`);
     if (regEx.exec(message.content)) {
