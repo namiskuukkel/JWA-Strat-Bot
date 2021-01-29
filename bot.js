@@ -16,7 +16,7 @@ client.on('message', message => {
     const regEx = new RegExp(`^${prefix}(?:set|s)`);
     if (regEx.exec(message.content)) {
         console.log(message.attachments);
-        const attachment = 'https://www.memesmonkey.com/topic/do+not+disturb';
+        const attachment = 'https://www.memesmonkey.com/images/memesmonkey/61/615cd9d3019c217931a3b167f05c5308.jpeg';
         // Send the attachment in the message channel
         message.channel.send("Shut the ... up!", {
             file: attachment });
