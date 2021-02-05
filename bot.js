@@ -13,7 +13,7 @@ client.on('message', message => {
     if (!message.author || message.author.id === process.env.BOT_ID  || message.author.bot)
         return;
     // Private message or something; either way, not from channel!
-    if (!msg.guild || !msg.guild.available) return;
+    if (!message.guild || !message.guild.available) return;
     console.log(process.env.DATABASE_URL);
     // const client = new DbClient({
     //     connectionString: process.env.DATABASE_URL,

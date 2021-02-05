@@ -4,7 +4,7 @@ const allCommands = require('./index')
 
 module.exports = {
   regex(settings) {
-    return new RegExp(`^${settings.prefix}(?:set|s)(?!user) (.*)$`, 'gi')
+    return new RegExp(`^${settings.prefix}(?:/adddino/|/ad/)`, 'gi')
   },
   async action({ msg, settings, match, client }) {
     if (!match[1])
