@@ -29,7 +29,9 @@ module.exports = {
                     console.log(err.stack);
                     return;
                 } else {
-                    server_id = res.rows[0].id
+                    console.log(res);
+                    const {id} = res.rows[0]
+                    server_id = id;
                 }
             })
 
