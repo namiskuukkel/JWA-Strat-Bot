@@ -1,12 +1,12 @@
 const { send } = require('./actions/replyInChannel')
 
-const allCommands = require('./index')
+const allCommands = require('./index');
 
 module.exports = {
     regex(settings) {
         return new RegExp(`^${settings.prefix}\\s*(?:add\\s+dino|ad)\\s+[A-Za-z0-9]+$`, 'gi');
     },
-    async action({ msg, settings, match, dbClient }) {
+    async action({ msg, match, dbClient, settings }) {
 
         try {
             const query = {

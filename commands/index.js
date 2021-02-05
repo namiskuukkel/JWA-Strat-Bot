@@ -21,7 +21,6 @@ module.exports = async (msg, client) => {
     for (let command of commands) {
         console.log(msg.content);
         const regex = command.regex(settings);
-        console.log(regex);
         const match = regex.exec(msg.content);
         console.log(match);
         if (match) {
@@ -30,7 +29,10 @@ module.exports = async (msg, client) => {
             const senderIsAdmin =
                 msg.guild &&
                 msg.guild.member(msg.author) &&
-                msg.guild.member(msg.author).permissions.has('BAN_MEMBERS') // was 'ADMINISTRATOR', sneakily switched
+                msg.guild.member(msg.author).permissions.has('BAN_MEMBERS'); // was 'ADMINISTRATOR', sneakily switched
+            
+            console.log(senderIsAdmin);
+            
             if (
                 command.adminOnly === true &&
                 !command.ignoreAdminOnly &&
@@ -52,23 +54,12 @@ module.exports = async (msg, client) => {
                 return true
             }
 
-            let typedUser
-            if (
-                command.expectsUserInRegexSlot &&
-                match[command.expectsUserInRegexSlot]
-            ) {
-                const usernameInPlainText = match[command.expectsUserInRegexSlot]
-                typedUser = await getUserInGuildFromText(msg, usernameInPlainText)
-            }
-
             // execute command
             await command.action({
                 msg,
                 match,
-                typedUser,
-                senderIsAdmin,
-                sender,
-                client,
+                dbClient,
+                settings
             })
         } else {
             console.log("No match!");
