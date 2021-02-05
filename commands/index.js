@@ -12,14 +12,13 @@ fs.readdir('./commands', (err, files) => {
 
 module.exports = async (msg, client) => {
     const sender = msg.author;
-    try {
-    console.log(msg.guild);
-    console.log(msg.guild.name);
-    } catch(er) {
+    // try {
+    // console.log(msg.guild);
+    // console.log(msg.guild.name);
+    // } catch(er) {
 
-    }
+    // }
     for (let command of commands) {
-        console.log(command);
         const match = command.regex(settings).exec(msg.content);
         if (match) {
             console.log("It's a match");
