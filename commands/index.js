@@ -10,7 +10,7 @@ fs.readdir('./commands', (err, files) => {
     })
 })
 
-module.exports = async (msg, client) => {
+module.exports = async (msg, dbClient) => {
     const sender = msg.author;
     // try {
     // console.log(msg.guild);
@@ -32,7 +32,7 @@ module.exports = async (msg, client) => {
                 msg.guild.member(msg.author).permissions.has('BAN_MEMBERS'); // was 'ADMINISTRATOR', sneakily switched
             
             console.log(senderIsAdmin);
-            
+
             if (
                 command.adminOnly === true &&
                 !command.ignoreAdminOnly &&
