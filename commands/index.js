@@ -10,8 +10,8 @@ fs.readdir('./commands', (err, files) => {
     })
 })
 
-module.exports = async (msg, dbClient) => {
-    const sender = msg.author;
+module.exports = async (message, dbClient) => {
+    const sender = message.author;
     // try {
     // console.log(msg.guild);
     // console.log(msg.guild.name);
@@ -19,17 +19,17 @@ module.exports = async (msg, dbClient) => {
 
     // }
     for (let command of commands) {
-        console.log(msg.content);
+        console.log(message.content);
         const regex = command.regex(settings);
-        const match = regex.exec(msg.content);
+        const match = regex.exec(message.content);
         console.log(match);
         if (match) {
             console.log("It's a match");
 
             const senderIsAdmin =
-                msg.guild &&
-                msg.guild.member(msg.author) &&
-                msg.guild.member(msg.author).permissions.has('BAN_MEMBERS'); // was 'ADMINISTRATOR', sneakily switched
+                message.guild &&
+                message.guild.member(message.author) &&
+                message.guild.member(message.author).permissions.has('BAN_MEMBERS'); // was 'ADMINISTRATOR', sneakily switched
             
             console.log(senderIsAdmin);
 
@@ -39,7 +39,7 @@ module.exports = async (msg, dbClient) => {
                 !senderIsAdmin
             ) {
                 send(
-                    msg,
+                    message,
                     `This command is currently disabled for non-admins.`,
                     false
                 )
@@ -47,7 +47,7 @@ module.exports = async (msg, dbClient) => {
             }
             if (command.admin && !senderIsAdmin) {
                 send(
-                    msg,
+                    message,
                     `That command is only available to server admins.`,
                     false
                 )
