@@ -7,7 +7,7 @@ module.exports = {
     regex(settings) {
         return new RegExp(`^${settings.prefix}\\s*(?:add\\s+dino|ad) (.*)$`, 'gi');
     },
-    async action({ message, match, dbClient, settings }) {
+    async action(message, match, dbClient, settings) {
 
         // In the second index there should be the second part defining the dino name
         if(!match[1]) {

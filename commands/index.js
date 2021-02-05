@@ -55,12 +55,12 @@ module.exports = async (message, dbClient) => {
             }
 
             // execute command
-            await command.action({
+            await command.action(
                 message,
                 match,
                 dbClient,
                 settings
-            })
+            )
         } else {
             console.log("No match!");
         }
