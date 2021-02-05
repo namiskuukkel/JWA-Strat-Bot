@@ -56,7 +56,7 @@ module.exports = async (msg, dbClient) => {
 
             // execute command
             await command.action({
-                msg,
+                message,
                 match,
                 dbClient,
                 settings
