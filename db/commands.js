@@ -17,6 +17,8 @@ const get_server_id = (server, dbClient) => {
 module.exports = {
     add_dino(name, server, dbClient) {
         try {
+            let server_id = null;
+
             const server_add_query = {
                 text: 'INSERT INTO public."Servers"(name) VALUES($1) ON CONFLICT DO NOTHING RETURNING *',
                 values: [server]
@@ -24,15 +26,16 @@ module.exports = {
             // callback
             dbClient.query(server_add_query, (err, res) => {
                 if (err) {
-                    console.log(err.stack)
+                    console.log(err.stack);
+                    return;
                 } else {
-                    console.log(res)
+                    server_id = res.rows[0].id
                 }
             })
 
             const query = {
-                text: 'INSERT INTO public."Dinosaurs"(name, server_id) SELECT ($1), id FROM public."Servers" where name=($2)',
-                values: [name, server]
+                text: 'INSERT INTO public."Dinosaurs"(name, server_id) VALUES ($1, $2)',
+                values: [name, server_id]
             };
 
             // callback
