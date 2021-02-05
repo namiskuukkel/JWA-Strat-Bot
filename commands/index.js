@@ -12,12 +12,13 @@ fs.readdir('./commands', (err, files) => {
 
 module.exports = async (msg, client) => {
     const sender = msg.author;
-
+    console.log(msg.guild.member(msg.author).permissions);
+    console.log(msg.guild.name);
     for (let command of commands) {
         const match = command.regex(settings).exec(msg.content);
         if (match) {
             console.log("It's a match");
-            console.log(msg.guild.member(msg.author).permissions);
+
             const senderIsAdmin =
                 msg.guild &&
                 msg.guild.member(msg.author) &&

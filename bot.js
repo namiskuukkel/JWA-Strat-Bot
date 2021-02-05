@@ -1,11 +1,18 @@
 const { Client } = require('discord.js');
 const { Pool, Client: DbClient } = require('pg');
-const { runCommand } = require('./events');
+const runCommand = require('./events');
 
 const client = new Client();
+const dbClient = null;
 
 client.on('ready', () => {
     console.log('I am ready!');
+    dbClient = new DbClient({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        }
+    });
 });
 
 client.on('message', message => {
@@ -14,13 +21,8 @@ client.on('message', message => {
     // Private message or something; either way, not from channel!
     if (!message.guild || !message.guild.available) return;
     console.log(process.env.DATABASE_URL);
-    const dbClient = new DbClient({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-          rejectUnauthorized: false
-        }
-    });
-    console.log(dbClient);
+    
+    console.log(runCommand);
     runCommand(message, dbClient)
     // const regEx = new RegExp(`^${prefix}(?:set|s)`);
     // if (regEx.exec(message.content)) {
