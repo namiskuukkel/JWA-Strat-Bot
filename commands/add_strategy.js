@@ -1,4 +1,4 @@
-const { send } = require('../actions/replyInChannel')
+const { send } = require('../actions/replyInChannel');
 
 const allCommands = require('./index');
 const {add_dino} = require('../db/commands');
