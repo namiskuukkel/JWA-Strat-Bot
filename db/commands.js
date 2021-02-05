@@ -5,7 +5,7 @@ module.exports = {
         try {
             const server_add_query = {
                 text: 'INSERT INTO public."Servers"(name) VALUES($1) ON CONFLICT DO NOTHING',
-                values: [message.guild.name]
+                values: [server]
             };
             console.log(server_add_query);
             console.log(dbClient);
