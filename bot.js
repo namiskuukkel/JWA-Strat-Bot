@@ -13,7 +13,7 @@ client.on('ready', () => {
           rejectUnauthorized: false
         }
     });
-    await dbClient.connect();
+    dbClient.connect();
 });
 
 client.on('message', message => {
