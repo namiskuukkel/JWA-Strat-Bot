@@ -1,40 +1,25 @@
 const { send } = require('./actions/replyInChannel')
 
 const allCommands = require('./index');
+const {add_dino} = require('../db/commands');
 
 module.exports = {
     regex(settings) {
-        return new RegExp(`^${settings.prefix}\\s*(?:add\\s+dino|ad)\\s+[A-Za-z0-9]+$`, 'gi');
+        return new RegExp(`^${settings.prefix}\\s*(?:add\\s+dino|ad) (.*)$`, 'gi');
     },
-    async action({ msg, match, dbClient, settings }) {
+    async action({ message, match, dbClient, settings }) {
 
-        try {
-            const query = {
-                text: 'INSERT INTO public."Servers"(name) VALUES($1) ON CONFLICT DO NOTHING',
-                values: [msg.guild.name]
-            };
-            console.log(query);
-            console.log(dbClient);
-            // callback
-            dbClient.query(query, (err, res) => {
-                if (err) {
-                    console.log(err.stack)
-                } else {
-                    console.log(res.rows[0])
-                }
-            })
-        } catch (err) {
-            console.log(err);
-        }
-
-        if (!match[1])
+        // In the second index there should be the second part defining the dino name
+        if(!match[1]) {
             return send(
-                msg,
-                `Use this command in the format ${settings.prefix}set <city or country name> to set your timezone.`,
+                message,
+                `Use this command in the format ${settings.prefix}add dino/${settings.prefix}ad <dinosaur name> to add a new raid boss.`,
                 false,
                 settings,
-            )
+              )
+        }
 
+        add_dino(match[1], message.guild.name, dbClient);
         // // admin accidentally used this command to try to set someone
         // const hasAt = match[1].indexOf('<@') >= 0
         // const hasSpaceAfterAt = match[1].lastIndexOf(' ') > hasAt
