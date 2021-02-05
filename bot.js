@@ -20,9 +20,7 @@ client.on('message', message => {
         return;
     // Private message or something; either way, not from channel!
     if (!message.guild || !message.guild.available) return;
-    console.log(process.env.DATABASE_URL);
-    
-    console.log(runCommand);
+
     runCommand(message, dbClient)
     // const regEx = new RegExp(`^${prefix}(?:set|s)`);
     // if (regEx.exec(message.content)) {
