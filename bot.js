@@ -3,7 +3,7 @@ const { Pool, Client: DbClient } = require('pg');
 const runCommand = require('./events');
 
 const client = new Client();
-const dbClient = null;
+let dbClient = null;
 
 client.on('ready', () => {
     console.log('I am ready!');
