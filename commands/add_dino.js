@@ -18,7 +18,9 @@ module.exports = {
                 settings,
               )
         }
-
+        console.log(add_dino);
+        console.log(match[1]);
+        console.log(message);
         add_dino(match[1], message.guild.name, dbClient);
         // // admin accidentally used this command to try to set someone
         // const hasAt = match[1].indexOf('<@') >= 0
