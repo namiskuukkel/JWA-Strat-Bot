@@ -3,7 +3,6 @@ const { Pool, Client: DbClient } = require('pg');
 const { runCommand } = require('./events');
 
 const client = new Client();
-const dbClient = new DbClient();
 
 client.on('ready', () => {
     console.log('I am ready!');
@@ -15,13 +14,14 @@ client.on('message', message => {
     // Private message or something; either way, not from channel!
     if (!message.guild || !message.guild.available) return;
     console.log(process.env.DATABASE_URL);
-    // const client = new DbClient({
-    //     connectionString: process.env.DATABASE_URL,
-    //     ssl: {
-    //       rejectUnauthorized: false
-    //     }
-    //   });
-    runCommand(msg, dbClient)
+    const dbClient = new DbClient({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false
+        }
+    });
+    console.log(dbClient);
+    runCommand(message, dbClient)
     // const regEx = new RegExp(`^${prefix}(?:set|s)`);
     // if (regEx.exec(message.content)) {
     //     console.log(message.attachments);
