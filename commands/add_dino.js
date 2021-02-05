@@ -10,9 +10,11 @@ module.exports = {
 
         try {
             const query = {
-                text: 'INSERT INTO Servers(name) VALUES($1) ON CONFLICT DO NOTHING',
+                text: 'INSERT INTO public."Servers"(name) VALUES($1) ON CONFLICT DO NOTHING',
                 values: [msg.guild.name]
             };
+            console.log(query);
+            console.log(dbClient);
             // callback
             dbClient.query(query, (err, res) => {
                 if (err) {
