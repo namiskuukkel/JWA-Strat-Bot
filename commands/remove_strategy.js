@@ -1,11 +1,11 @@
-const { send } = require('./actions/replyInChannel')
+const { send } = require('../actions/replyInChannel')
 
 const allCommands = require('./index');
-const {remove_dino} = require('../db/commands');
+const {add_dino} = require('../db/commands');
 
 module.exports = {
     regex(settings) {
-        return new RegExp(`^${settings.prefix}\\s*(?:remove\\s+dino|rd) (.*)$`, 'gi');
+        return new RegExp(`^${settings.prefix}\\s*(?:add\\s+dino|ad) (.*)$`, 'gi');
     },
     async action(message, match, dbClient, settings) {
 
@@ -13,13 +13,13 @@ module.exports = {
         if(!match[1]) {
             return send(
                 message,
-                `Use this command in the format ${settings.prefix}remove dino/${settings.prefix}rd <dinosaur name> to add a new raid boss.`,
+                `Use this command in the format ${settings.prefix}add dino/${settings.prefix}ad <dinosaur name> to add a new raid boss.`,
                 false,
                 settings,
               )
         }
 
-        remove_dino(match[1], message.guild.name, dbClient);
+        add_dino(match[1], message.guild.name, dbClient);
         // // admin accidentally used this command to try to set someone
         // const hasAt = match[1].indexOf('<@') >= 0
         // const hasSpaceAfterAt = match[1].lastIndexOf(' ') > hasAt
