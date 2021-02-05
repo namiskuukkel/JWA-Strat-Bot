@@ -18,7 +18,7 @@ module.exports = {
     add_dino(name, server, dbClient) {
         try {
             const server_add_query = {
-                text: 'INSERT INTO public."Servers"(name) VALUES($1) ON CONFLICT DO NOTHING',
+                text: 'INSERT INTO public."Servers"(name) VALUES($1) ON CONFLICT DO NOTHING RETURNING *',
                 values: [server]
             };
             // callback
