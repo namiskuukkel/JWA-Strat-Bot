@@ -19,7 +19,11 @@ module.exports = async (msg, client) => {
 
     // }
     for (let command of commands) {
-        const match = command.regex(settings).exec(msg.content);
+        console.log(msg.content);
+        const regex = command.regex(settings);
+        console.log(regex);
+        const match = regex.exec(msg.content);
+        console.log(match);
         if (match) {
             console.log("It's a match");
 
@@ -66,6 +70,8 @@ module.exports = async (msg, client) => {
                 sender,
                 client,
             })
+        } else {
+            console.log("No match!");
         }
     }
 }

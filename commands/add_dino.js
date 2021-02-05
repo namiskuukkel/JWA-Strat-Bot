@@ -4,6 +4,7 @@ const allCommands = require('./index')
 
 module.exports = {
     regex(settings) {
+        console.log(settings);
         return new RegExp(`^${settings.prefix}(?:dino|d)\s*[A-Za-z0-9]*$`, 'gi');
     },
     async action({ msg, settings, match, dbClient }) {
