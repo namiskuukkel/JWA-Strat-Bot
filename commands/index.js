@@ -5,7 +5,7 @@ const settings = require('../default_settings');
 const commands = [];
 fs.readdir('./commands', (err, files) => {
     files.forEach((file) => {
-        if (!file.endsWith('.js') || file === 'index.js') return
+        if (file !== 'add_dino.js' || !file.endsWith('.js') || file === 'index.js') return
         commands.push(require(`./${file}`))
     })
 })
